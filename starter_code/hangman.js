@@ -15,7 +15,8 @@ Hangman.prototype.getWord = function() {
 };
 
 Hangman.prototype.checkIfLetter = function(keyCode) {
-  return keyCode > 64 && keyCode < 91;
+// Le puse  la propiedad keyCode para obtener el numero - funciona
+  return keyCode.keyCode > 64 && keyCode.keyCode < 91;
 };
 
 Hangman.prototype.checkClickedLetters = function(key) {
@@ -23,17 +24,18 @@ Hangman.prototype.checkClickedLetters = function(key) {
 };
 
 Hangman.prototype.addCorrectLetter = function(i) {
-  var letter = String.fromCharCode(i);
+  var letter = i;
   if (this.secretWord.toUpperCase().includes(letter.toUpperCase())) {
     this.guessedLetter += letter;
-    return this.checkWinner();
+    return this.guessedLetter;
   }
+  return this.addWrongLetter(i);
 };
 
 Hangman.prototype.addWrongLetter = function (letter) {
   this.errorsLeft--;
   this.letters.push(letter);
-  return this.checkGameOver();
+  return this.letters;
 };
 
 Hangman.prototype.checkGameOver = function () {
@@ -46,6 +48,20 @@ Hangman.prototype.checkWinner = function() {
 
 document.getElementById("start-game-button").onclick = function() {
   hangman = new Hangman();
+  console.log(hangman.getWord());
+
 };
 
-document.onkeydown = function(e) {};
+
+document.onkeydown = function(e) {
+  console.log(hangman.secretWord);
+
+  console.log(hangman.checkIfLetter(e));
+  console.log("Correcta",hangman.addCorrectLetter(e.key));
+  console.log("INCorrecta",hangman.addWrongLetter(e.key));
+
+  console.log(e);
+  // console.log(hangman.checkClickedLetters(e))
+  hanganCanvas.writeCorrectLetter(e.key)
+  
+};

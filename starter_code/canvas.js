@@ -2,11 +2,13 @@ function HangmanCanvas(secretWord) {
   this.canvas = document.getElementById('hangman');
   this.ctx = this.canvas.getContext('2d');
 
-  // Color para trabajar el canvas
-  ctx.fillStyle = "#FF0000";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-}
+  
 
+  // Color para trabajar el canvas
+  // ctx.fillStyle = "#FF0000";
+  // ctx.fillRect(0, 0, canvas.width, canvas.height);
+  
+}
 
 HangmanCanvas.prototype.createBoard = function () {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -16,10 +18,9 @@ HangmanCanvas.prototype.drawLines = function () {
 
 };
 
-
-
 HangmanCanvas.prototype.writeCorrectLetter = function (index) {
-
+  ctx.font = "70px Arial";
+  ctx.fillText(index, 400, 700);;
 };
 
 HangmanCanvas.prototype.writeWrongLetter = function (letter, errorsLeft) {
@@ -41,7 +42,9 @@ HangmanCanvas.prototype.winner = function () {
 
 
 //-------------- Funciones para dibujar cada linea del Ahorcado----------
-HangmanCanvas("Hola") //Eliminar-- Lama al contexto para probar el dibujo
+HangmanCanvas("Hola") //Eliminar-- Llama al contexto para probar el dibujo
+
+hanganCanvas = new HangmanCanvas();
 
 var line01 = function () {
   ctx.beginPath();
@@ -113,14 +116,11 @@ var line10 = function () {
   ctx.stroke();
 }
 
-line01();
-line02();
-line03();
-line04();
-line05();
-line06();
-line07();
-line08();
-line09();
-line10();
+// Array de funciones para dibujar el Ahoracdo
+var line = [line01(), line02(), line03(), line04(), line05(), line06(), line07(), line08(), line09(), line10()];
 
+
+
+// line.forEach(function(){
+
+// })
